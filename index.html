@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>District 5 Projects — Boston City Council</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0e2340;
+    --navy-mid: #1a3557;
+    --gold: #c9973a;
+    --gold-light: #f0c97a;
+    --cream: #faf7f2;
+    --white: #ffffff;
+    --text: #1a2433;
+    --text-mid: #3d4f63;
+    --text-muted: #6b7f96;
+    --border: rgba(14,35,64,0.1);
+    --construction: #1b5e20;
+    --construction-bg: #e8f5e9;
+    --design: #0d47a1;
+    --design-bg: #e3f2fd;
+    --planning: #e65100;
+    --planning-bg: #fff3e0;
+    --fabrication: #6a1b9a;
+    --fabrication-bg: #f3e5f5;
+    --boardapproved: #00695c;
+    --boardapproved-bg: #e0f2f1;
+    --underreview: #8d6e00;
+    --underreview-bg: #fff8e1;
+    --underconstruction: #ad1457;
+    --underconstruction-bg: #fce4ec;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 70px 32px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201,151,58,0.18);
+    color: var(--gold-light);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 99px;
+    margin-bottom: 22px;
+    border: 1px solid rgba(201,151,58,0.3);
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 62px);
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .hero-stat-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* decorative circles */
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -120px;
+    top: -80px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,151,58,0.12);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    top: -20px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,151,58,0.08);
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* ── FILTERS ── */
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .filter-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-right: 4px;
+  }
+
+  .filter-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+  }
+
+  .filter-btn.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 20px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(14,35,64,0.1);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-accent {
+    height: 4px;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: 20px 22px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    line-height: 1.3;
+    color: var(--navy);
+  }
+
+  .phase-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .badge-construction { background: var(--construction-bg); color: var(--construction); }
+  .badge-design       { background: var(--design-bg);       color: var(--design); }
+  .badge-planning     { background: var(--planning-bg);     color: var(--planning); }
+  .badge-fabrication  { background: var(--fabrication-bg);  color: var(--fabrication); }
+  .badge-board-approved    { background: var(--boardapproved-bg);    color: var(--boardapproved); }
+  .badge-under-review      { background: var(--underreview-bg);      color: var(--underreview); }
+  .badge-under-construction{ background: var(--underconstruction-bg); color: var(--underconstruction); }
+
+  .accent-construction { background: var(--construction); }
+  .accent-design       { background: var(--design); }
+  .accent-planning     { background: var(--planning); }
+  .accent-fabrication  { background: var(--fabrication); }
+  .accent-board-approved     { background: var(--boardapproved); }
+  .accent-under-review       { background: var(--underreview); }
+  .accent-under-construction { background: var(--underconstruction); }
+
+  .card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .meta-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    opacity: 0.6;
+  }
+
+  .card-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+
+  .highlights-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .highlights-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+  }
+
+  .highlights-list li {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.45;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .highlights-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.7;
+  }
+
+  .card-contact {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .card-contact a {
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .card-contact a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px 32px;
+    font-size: 13px;
+  }
+
+  footer a { color: var(--gold-light); text-decoration: none; }
+
+  /* ── SECTION HEADING ── */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .section-heading h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+  }
+
+  .result-count {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ── NO RESULTS ── */
+  .no-results {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero-inner { padding: 50px 20px 44px; }
+    .content { padding: 32px 20px 60px; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="6" r="2" fill="currentColor"/></svg>
+      Boston City Council · District 5
+    </div>
+    <h1>Our <em>Neighborhood</em><br>Projects</h1>
+    <p class="hero-sub">Tracking every active city project across Roslindale, Mattapan, and Hyde Park — from design through construction.</p>
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+</header>
+
+<main class="content">
+  <div class="filter-bar">
+    <span class="filter-label">Filter by</span>
+    <button class="filter-btn active" onclick="setFilter('All', this)">All neighborhoods</button>
+    <button class="filter-btn" onclick="setFilter('Roslindale', this)">Roslindale</button>
+    <button class="filter-btn" onclick="setFilter('Mattapan', this)">Mattapan</button>
+    <button class="filter-btn" onclick="setFilter('Hyde Park', this)">Hyde Park</button>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Project type</span>
+    <button class="filter-btn active" onclick="setTypeFilter('All', this)">All types</button>
+    <button class="filter-btn" onclick="setTypeFilter('Infrastructure', this)">Infrastructure &amp; Public Realm</button>
+    <button class="filter-btn" onclick="setTypeFilter('Development', this)">Real Estate Development</button>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Phase</span>
+    <button class="filter-btn active" onclick="setPhaseFilter('All', this)">All phases</button>
+    <button class="filter-btn" onclick="setPhaseFilter('Planning', this)">Planning</button>
+    <button class="filter-btn" onclick="setPhaseFilter('Design', this)">Design</button>
+    <button class="filter-btn" onclick="setPhaseFilter('Fabrication', this)">Fabrication</button>
+    <button class="filter-btn" onclick="setPhaseFilter('Under Review', this)">Under Review</button>
+    <button class="filter-btn" onclick="setPhaseFilter('Board Approved', this)">Board Approved</button>
+    <button class="filter-btn" onclick="setPhaseFilter('Under Construction', this)">Under Construction</button>
+    <button class="filter-btn" onclick="setPhaseFilter('Construction', this)">Construction</button>
+  </div>
+
+  <div class="section-heading">
+    <h2 id="section-title">All Projects</h2>
+    <span class="result-count" id="result-count"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <p>Data sourced from Boston City Council District 5 · <a href="https://www.boston.gov/departments/city-council" target="_blank">boston.gov</a></p>
+</footer>
+
+<script>
+const projects = [
+ {
+    "name": "South Street & Walter Street Intersections Reconstruction",
+    "phase": "Design",
+    "neighborhood": "Roslindale",
+    "location": "South Street, between Fletcher and Hewlett",
+    "completion": "2026",
+    "highlights": [
+      "Reconstruct sidewalks, crosswalks, ramps",
+      "Modernize traffic signals",
+      "Repave roadways with high-vis striping",
+      "Eastbound bike lane",
+      "New planted areas"
+    ],
+    "contact": null,
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/transportation/project/south-street-and-walter-street-intersections-reconstruction"
+  },
+  {
+    "name": "Mt. Hope Cemetery Improvements",
+    "phase": "Design",
+    "neighborhood": "Roslindale",
+    "location": "355 Walk Hill Street",
+    "completion": "2026",
+    "highlights": [
+      "Repair cemetery roadways",
+      "Improve drainage",
+      "Two-acre expansion & gateway improvements",
+      "Increased internment capacity",
+      "Wrought iron fencing"
+    ],
+    "contact": "kenya.thompson2@boston.gov",
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/parks-and-recreation/project/mt-hope-cemetery-improvements-phase-1-roads"
+  },
+  {
+    "name": "Citywide Court Renovation",
+    "phase": "Construction",
+    "neighborhood": "Hyde Park / Mattapan",
+    "location": "Ross Playground & Hunt-Almont Playground",
+    "completion": "2026",
+    "highlights": [
+      "Ross Playground tennis & basketball courts",
+      "Bike Town",
+      "Hunt-Almont tennis court improvements"
+    ],
+    "contact": "kezia.ofiesh@boston.gov",
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/parks-and-recreation/project/various-courts-citywide"
+  },
+  {
+    "name": "Book Mark'D",
+    "phase": "Fabrication",
+    "neighborhood": "Mattapan",
+    "location": "Mattapan Branch of Public Library",
+    "completion": "2026",
+    "highlights": [
+      "12-foot tall bronze sculpture",
+      "Books in spiral shape",
+      "Public art installation"
+    ],
+    "contact": null,
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/arts-and-culture/project/book-markd"
+  },
+  {
+    "name": "Poplar Street Renovation",
+    "phase": "Design",
+    "neighborhood": "Roslindale",
+    "location": "Poplar Street",
+    "completion": "2028",
+    "highlights": [
+      "Upgraded intersections at Florence, Sycamore, Heathcote, Delano Park & Brown Ave",
+      "ADA curb ramps",
+      "Raised crosswalks",
+      "Curb extensions",
+      "Green infrastructure"
+    ],
+    "contact": null,
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/transportation/project/poplar-street-roslindale"
+  },
+  {
+    "name": "Blue Hill Ave Transportation Action Plan",
+    "phase": "Design",
+    "neighborhood": "Mattapan",
+    "location": "Blue Hill Avenue",
+    "completion": "TBD",
+    "highlights": [
+      "Increase tree canopy",
+      "New small business corridor amenities",
+      "Center-running bus lane"
+    ],
+    "contact": null,
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/transportation/project/blue-hill-avenue-transportation-action-plan"
+  },
+  {
+    "name": "Roslindale Square Transportation Action Plan",
+    "phase": "Planning",
+    "neighborhood": "Roslindale",
+    "location": "Roslindale Square",
+    "completion": "2026",
+    "highlights": [
+      "Support placemaking & community development",
+      "Improve safety for pedestrians, cyclists, and transit riders"
+    ],
+    "contact": "michael.tormey2@boston.gov",
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/transportation/project/roslindale-square-transportation-action-plan"
+  },
+  {
+    "name": "Hyde Park Ave Multimodal Corridor",
+    "phase": "Planning",
+    "neighborhood": "Hyde Park",
+    "location": "Hyde Park Avenue",
+    "completion": "TBD",
+    "highlights": [
+      "Improve speed & reliability",
+      "Increase development capacity",
+      "Align with city transit goals"
+    ],
+    "contact": null,
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/transportation/project/hyde-park-avenue-multimodal-corridor"
+  },
+  {
+    "name": "Roslindale Bus Lanes",
+    "phase": "Design",
+    "neighborhood": "Roslindale",
+    "location": "Washington St — Roslindale Village to Forest Hills",
+    "completion": "2027",
+    "highlights": [
+      "New crosswalks",
+      "24-hour bus lane extension",
+      "Bus lane refresh",
+      "Curb extensions & bus bump-outs"
+    ],
+    "contact": null,
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/transportation/project/roslindale-bus-lanes"
+  },
+  {
+    "name": "Cummins Highway",
+    "phase": "Construction",
+    "neighborhood": "Mattapan",
+    "location": "Cummins Highway",
+    "completion": "2026",
+    "highlights": [
+      "New sidewalk construction",
+      "Bus stop upgrades",
+      "Street paving",
+      "Crosswalk & road striping",
+      "Trees & plantings"
+    ],
+    "contact": null,
+    "type": "Infrastructure",
+    "link": "https://www.boston.gov/departments/public-works/project/cummins-highway"
+  },
+  {
+    "name": "Wood Avenue Safety Improvements",
+    "phase": "Design",
+    "neighborhood": "Hyde Park",
+    "location": "Wood Avenue",
+    "completion": "TBD",
+    "highlights": [
+      "Raised crosswalks & pedestrian ramps",
+      "Sidewalk reconstruction",
+      "New trees & plantings",
+      "Curb extensions",
+      "Lower traffic speeds",
+      "Improved drainage"
+    ],
+    "contact": null,
+    "type": "Infrastructure",
+    "link": null
+  },
+  {
+    "name": "1702 Hyde Park Avenue",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "1702 Hyde Park Ave, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "7-story condominium building",
+      "Approx. 68 units",
+      "2,500 sq ft of commercial/retail space"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1702-hyde-park-avenue"
+  },
+  {
+    "name": "990 American Legion Highway",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "990 American Legion Highway",
+    "completion": "TBD",
+    "highlights": [
+      "204-unit residential neighborhood apartment community",
+      "Nine 2- and 3-story buildings",
+      "Freestanding amenity building with modern resident amenities"
+    ],
+    "contact": "Sara.peck@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/990-american-legion-highway"
+  },
+  {
+    "name": "1740 Hyde Park Ave",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "1740 Hyde Park Ave, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "New 5-story residential building",
+      "42 units",
+      "19 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1740-hyde-park-avenue"
+  },
+  {
+    "name": "85-87 Walnut Street",
+    "phase": "Under Review",
+    "neighborhood": "Hyde Park",
+    "location": "85-87 Walnut Street, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "Combines three parcels of land",
+      "30-unit residential dwelling",
+      "16 parking garage spaces"
+    ],
+    "contact": "dan.polanco@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/85-87-walnut-street"
+  },
+  {
+    "name": "1318 River Street",
+    "phase": "Under Construction",
+    "neighborhood": "Hyde Park",
+    "location": "1318 River Street, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "4-story residential apartment building",
+      "30 rental units",
+      "Ground floor retail",
+      "20 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1318-river-street"
+  },
+  {
+    "name": "1305 Hyde Park Ave",
+    "phase": "Under Construction",
+    "neighborhood": "Hyde Park",
+    "location": "1305 Hyde Park Ave, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "5-story residential building",
+      "54 units (44 studio, 8 one-bedroom, 2 two-bedroom)",
+      "21 parking spaces"
+    ],
+    "contact": "dan.polanco@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1305-hyde-park-avenue"
+  },
+  {
+    "name": "1690-1700 Hyde Park Ave",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "1690-1700 Hyde Park Ave, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "115 multi-family rental units",
+      "69 parking spaces",
+      "Widened public sidewalk",
+      "New open space"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1690-1700-hyde-park-avenue"
+  },
+  {
+    "name": "1081 River Street",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "1081 River Street, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "New multifamily residential building",
+      "28 rental units",
+      "15 parking spaces"
+    ],
+    "contact": "dan.polanco@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1081-river-street"
+  },
+  {
+    "name": "735-745 River Street",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "735-745 River Street, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "5-story mixed-use building",
+      "Commercial space for existing health clinic",
+      "40 rental units",
+      "26 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/735-745-river-street"
+  },
+  {
+    "name": "Readville Station Residences",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "1717-1725 Hyde Park Ave, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "Construction of 2 buildings",
+      "279 residential units",
+      "273 parking spaces",
+      "3,617 sq ft restaurant/retail space",
+      "Resident amenities and services"
+    ],
+    "contact": "camille.plattdecosta@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/residences-at-readville-station"
+  },
+  {
+    "name": "30 Thorn Street",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "30 Thorn Street, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "New 6-story residential building",
+      "45 units (15 studio, 15 one-bdr, 10 two-bdr, 5 three-bdr)",
+      "19 parking spaces"
+    ],
+    "contact": "dan.polanco@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/30-thorn-street"
+  },
+  {
+    "name": "7 Dana Ave",
+    "phase": "Under Construction",
+    "neighborhood": "Hyde Park",
+    "location": "7 Dana Ave, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "Four-story, 27-unit building (18 one-bdr, 9 two-bdr)",
+      "30 parking spaces"
+    ],
+    "contact": "zoe.duvall@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/7-dana-avenue"
+  },
+  {
+    "name": "34 Oak Street",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "34 Oak Street, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "3-story building",
+      "21 rental units",
+      "9 parking spaces",
+      "22 bike parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/34-oak-street"
+  },
+  {
+    "name": "804 Hyde Park Ave",
+    "phase": "Under Construction",
+    "neighborhood": "Hyde Park",
+    "location": "804 Hyde Park Ave",
+    "completion": "TBD",
+    "highlights": [
+      "4-story residential rental building",
+      "34 residential units",
+      "19 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/804-hyde-park-avenue"
+  },
+  {
+    "name": "555 Metropolitan Ave",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "555 Metropolitan Ave, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "3-story building",
+      "21 residential units",
+      "21 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/555-metropolitan-avenue"
+  },
+  {
+    "name": "99-105 Fairmount Ave",
+    "phase": "Board Approved",
+    "neighborhood": "Hyde Park",
+    "location": "99-105 Fairmount Ave, Hyde Park",
+    "completion": "TBD",
+    "highlights": [
+      "4-story mixed-use development",
+      "47 rental units (6 IDP)",
+      "33 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/99-105-fairmount-avenue"
+  },
+  {
+    "name": "1590 Blue Hill Ave",
+    "phase": "Under Review",
+    "neighborhood": "Mattapan",
+    "location": "1590 Blue Hill Ave, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "105 income-restricted rental apartments",
+      "1,000 sq ft community/commercial space along Blue Hill Ave",
+      "31 parking spaces",
+      "6-story L-shaped building",
+      "Site improvements"
+    ],
+    "contact": "camille.plattdecosta@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1590-blue-hill-avenue"
+  },
+  {
+    "name": "1576 Blue Hill Avenue",
+    "phase": "Under Review",
+    "neighborhood": "Mattapan",
+    "location": "1576 Blue Hill Ave, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "6-story mixed-use building",
+      "58 residential units",
+      "4 parking spaces",
+      "Outdoor amenity space"
+    ],
+    "contact": "jason.farrell@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1576-blue-hill-avenue"
+  },
+  {
+    "name": "841 Morton Street",
+    "phase": "Board Approved",
+    "neighborhood": "Mattapan",
+    "location": "841 Morton Street, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "5-story mixed-use multi-family residence",
+      "52 residential units",
+      "35 parking spaces",
+      "42 bicycle spaces"
+    ],
+    "contact": "tyler.c.ross@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/841-morton-street"
+  },
+  {
+    "name": "691-695 Morton Street",
+    "phase": "Board Approved",
+    "neighborhood": "Mattapan",
+    "location": "619-695 Morton Street, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "6-story mixed-use building",
+      "29 units",
+      "Common roof deck",
+      "5 parking spaces",
+      "Ground level retail space"
+    ],
+    "contact": "quinn.w.valcich@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/691-695-morton-street"
+  },
+  {
+    "name": "Olmsted Village",
+    "phase": "Board Approved",
+    "neighborhood": "Mattapan",
+    "location": "Lot 2A-3-2 Harvard Street, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "Six new residential buildings",
+      "284 units total",
+      "127 affordable senior rental units",
+      "Ground floor community space, medical suite & childcare center",
+      "60 affordable intergenerational rental units",
+      "43 mixed-income family homeownership units",
+      "8 market-rate family homeownership units (two 3-story buildings)",
+      "46 mixed-income family homeownership units"
+    ],
+    "contact": "quinn.w.valcich@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/olmsted-village"
+  },
+  {
+    "name": "White Stadium",
+    "phase": "Under Construction",
+    "neighborhood": "Mattapan",
+    "location": "450 Walnut Ave, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "Renovation of White Stadium",
+      "Improved facility for BPS students and community events",
+      "Home venue for National Women’s Soccer League team"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/white-stadium"
+  },
+  {
+    "name": "819 Cummins Highway",
+    "phase": "Board Approved",
+    "neighborhood": "Mattapan",
+    "location": "819 Cummins Highway, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "5-story, 40-unit mixed-use building",
+      "25 parking spaces",
+      "Residential lobby and retail space on ground floor"
+    ],
+    "contact": "camille.plattdecosta@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/819-cummins-highway"
+  },
+  {
+    "name": "156 Wellington Hill Street",
+    "phase": "Board Approved",
+    "neighborhood": "Mattapan",
+    "location": "156 Wellington Hill Street, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "Home ownership project",
+      "5-story, 27-unit mixed-use building",
+      "Common roof deck",
+      "12 parking spaces",
+      "Ground level retail space"
+    ],
+    "contact": "camille.plattdecosta@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/156-wellington-hill-street"
+  },
+  {
+    "name": "1471 Blue Hill Ave",
+    "phase": "Under Construction",
+    "neighborhood": "Mattapan",
+    "location": "1471 Blue Hill Ave, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "Revitalization of vacant property with 5-story residential building",
+      "41 affordable rental units",
+      "12 parking spaces",
+      "Community art space/work room"
+    ],
+    "contact": "camille.plattdecosta@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1471-blue-hill-avenue"
+  },
+  {
+    "name": "1525 Blue Hill Ave",
+    "phase": "Board Approved",
+    "neighborhood": "Mattapan",
+    "location": "1525 Blue Hill Ave, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "Mixed-use building",
+      "1 commercial space",
+      "16 transit-oriented home-ownership units"
+    ],
+    "contact": "tyler.c.ross@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1525-blue-hill-avenue"
+  },
+  {
+    "name": "61 Columbia Road",
+    "phase": "Under Review",
+    "neighborhood": "Mattapan",
+    "location": "61 Columbia Road, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "Mixed-use building",
+      "45 residential units (55 compact, 6 affordable)",
+      "32 parking spaces",
+      "200+ seat auditorium"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/61-columbia-road"
+  },
+  {
+    "name": "1199-1203 Blue Hill Avenue",
+    "phase": "Under Review",
+    "neighborhood": "Mattapan",
+    "location": "1199-1203 Blue Hill Ave, Mattapan",
+    "completion": "TBD",
+    "highlights": [
+      "Mixed-use residential and commercial development",
+      "5-story building, 32 residential units (16 one-bdr, 16 two-bdr)",
+      "Cafe/restaurant space",
+      "32 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1199-1203-blue-hill-avenue"
+  },
+  {
+    "name": "4301 Washington Street",
+    "phase": "Under Review",
+    "neighborhood": "Roslindale",
+    "location": "4301 Washington Street, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "4-story building",
+      "16 residential units",
+      "7 parking spaces"
+    ],
+    "contact": "tyler.c.ross@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/4301-washington-street"
+  },
+  {
+    "name": "3841 Washington Street",
+    "phase": "Under Review",
+    "neighborhood": "Roslindale",
+    "location": "3841 Washington Street, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "7-story mixed-use building",
+      "165 units",
+      "33 parking spaces"
+    ],
+    "contact": "Lucia.penabanda@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/3841-washington-street"
+  },
+  {
+    "name": "4487 Washington Street",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "3387 Washington Street, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "5-story residential building",
+      "28 units",
+      "12 parking spaces"
+    ],
+    "contact": "zoe.duvall@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/4487-washington-street"
+  },
+  {
+    "name": "4259-4267 Washington Street",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "4259-4267 Washington St, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "Mixed-use affordable senior housing development",
+      "41 units for seniors, affordable at or below 60% AMI",
+      "Fitness center, roof deck",
+      "Commercial space"
+    ],
+    "contact": "Camille.plattdecosta@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/4259-4267-washington-street"
+  },
+  {
+    "name": "1200 Centre Street",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "1200 Centre Street, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "78-unit affordable senior housing community",
+      "Healthcare and research facility",
+      "Common amenity space"
+    ],
+    "contact": "Camille.plattdecosta@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/1200-centre-street"
+  },
+  {
+    "name": "586-589 Canterbury Street",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "586-598 Canterbury Street, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "46 units",
+      "32 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/586-598-canterbury-street"
+  },
+  {
+    "name": "55-57 Belgrade Ave",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "55-57 Belgrade Avenue, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "15 condo units",
+      "11 parking spaces",
+      "19 bicycle spaces"
+    ],
+    "contact": "Camille.plattdecosta@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/55-57-belgrade-avenue"
+  },
+  {
+    "name": "361 Belgrade Avenue",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "351-371 Belgrade Ave, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "Transit-oriented development",
+      "5-story, 123 units",
+      "86 parking spaces"
+    ],
+    "contact": "quinn.w.valcich@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/361-belgrade-avenue"
+  },
+  {
+    "name": "18-22 Arboretum Road",
+    "phase": "Under Review",
+    "neighborhood": "Roslindale",
+    "location": "18-22 Arboretum Road, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "Multifamily residential building",
+      "6-story, 230 apartments",
+      "124 parking spaces",
+      "Affordable units"
+    ],
+    "contact": "quinn.w.valcich@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/18-22-arboretum-road"
+  },
+  {
+    "name": "4198 Washington Street",
+    "phase": "Under Construction",
+    "neighborhood": "Roslindale",
+    "location": "4198 Washington Street, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "5-story mixed-use building",
+      "31 residential units",
+      "Retail/community theater space",
+      "38 bicycle storage spaces"
+    ],
+    "contact": "zoe.duvall@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/4198-washington-street"
+  },
+  {
+    "name": "635-641 Hyde Park Ave",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "635-641 Hyde Park Ave, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "4-story building",
+      "27 units",
+      "Common roof deck",
+      "14 parking spaces"
+    ],
+    "contact": "zoe.duvall@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/635-641-hyde-park-avenue"
+  },
+  {
+    "name": "4011-4019 Washington Street",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "4011-4019 Washington St, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "4-story mixed-use building",
+      "19 residential units",
+      "Green roof",
+      "3 affordable units",
+      "Ground floor commercial space"
+    ],
+    "contact": "tyler.c.ross@boston.gov",
+    "type": "Development",
+    "link": null
+  },
+  {
+    "name": "43 Lochdale Road",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "43 Lochdale Road, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "4-story residential building",
+      "38 units",
+      "46 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/43-lochdale-road"
+  },
+  {
+    "name": "780 American Legion Highway",
+    "phase": "Under Review",
+    "neighborhood": "Roslindale",
+    "location": "780 American Legion Highway, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "Mixed-use development",
+      "Behavioral and clinical health facility",
+      "22 units of housing for youth aging out of foster care",
+      "93 market-rate and workforce rental units",
+      "Adds 115 units of family and affordable housing"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/780-american-legion-highway"
+  },
+  {
+    "name": "3992-3996 Washington Street",
+    "phase": "Under Construction",
+    "neighborhood": "Roslindale",
+    "location": "3992-3996 Washington St, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "Mixed-use development",
+      "18 residential condo units",
+      "Ground floor commercial space",
+      "18 parking spaces"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": "https://www.bostonplans.org/projects/development-projects/3992-3996-washington-street"
+  },
+  {
+    "name": "44 Lochdale Road",
+    "phase": "Board Approved",
+    "neighborhood": "Roslindale",
+    "location": "44 Lochdale Road, Roslindale",
+    "completion": "TBD",
+    "highlights": [
+      "Renovation of existing 2-story commercial building",
+      "15 parking spaces",
+      "Commercial/storage use"
+    ],
+    "contact": "bpdadevelopment@boston.gov",
+    "type": "Development",
+    "link": null
+  }
+];
+
+let activeNeighborhood = 'All';
+let activeType = 'All';
+let activePhase = 'All';
+
+function phaseKey(p) { return p.toLowerCase().replace(/\s+/g, '-'); }
+
+function renderHeroStats() {
+  const phases = [
+    { label: 'Total Projects', val: projects.length },
+    { label: 'Infrastructure & Public Realm', val: projects.filter(p => p.type === 'Infrastructure').length },
+    { label: 'Real Estate Development', val: projects.filter(p => p.type === 'Development').length },
+    { label: 'Under Construction', val: projects.filter(p => p.phase === 'Construction' || p.phase === 'Under Construction').length },
+  ];
+  document.getElementById('hero-stats').innerHTML = phases.map(s => `
+    <div>
+      <div class="hero-stat-val">${s.val}</div>
+      <div class="hero-stat-label">${s.label}</div>
+    </div>
+  `).join('');
+}
+
+function setFilter(neighborhood, btn) {
+  activeNeighborhood = neighborhood;
+  btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function setTypeFilter(type, btn) {
+  activeType = type;
+  btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function setPhaseFilter(phase, btn) {
+  activePhase = phase;
+  btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function renderGrid() {
+  const filtered = projects.filter(p => {
+    const matchNeighborhood = activeNeighborhood === 'All' || p.neighborhood.includes(activeNeighborhood);
+    const matchType = activeType === 'All' || p.type === activeType;
+    const matchPhase = activePhase === 'All' || p.phase === activePhase;
+    return matchNeighborhood && matchType && matchPhase;
+  });
+
+  document.getElementById('section-title').textContent =
+    activeNeighborhood === 'All' ? 'All Projects' : activeNeighborhood + ' Projects';
+  document.getElementById('result-count').textContent =
+    filtered.length + ' project' + (filtered.length !== 1 ? 's' : '');
+
+  const grid = document.getElementById('grid');
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="no-results">No projects found for this area.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map((p, i) => {
+    const key = phaseKey(p.phase);
+    return `
+    <article class="card" style="animation-delay:${i * 50}ms">
+      <div class="card-accent accent-${key}"></div>
+      <div class="card-body">
+        <div class="card-header">
+          <h3 class="card-title">${p.name}</h3>
+          <span class="phase-badge badge-${key}">${p.phase}</span>
+        </div>
+        <div class="card-meta">
+          <div class="meta-row">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>${p.location} · ${p.neighborhood}</span>
+          </div>
+          <div class="meta-row">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>Expected completion: <strong>${p.completion}</strong></span>
+          </div>
+          <div class="meta-row">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+            <span>${p.type === 'Development' ? 'Real Estate Development' : 'Infrastructure & Public Realm'}</span>
+          </div>
+        </div>
+        <hr class="card-divider">
+        <p class="highlights-title">Project highlights</p>
+        <ul class="highlights-list">
+          ${p.highlights.map(h => `<li>${h}</li>`).join('')}
+        </ul>
+        ${(p.contact || p.link) ? `
+        <div class="card-contact">
+          ${p.contact ? `Project Manager: <a href="mailto:${p.contact}">${p.contact}</a>` : ''}
+          ${(p.contact && p.link) ? '<br>' : ''}
+          ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener">View project page →</a>` : ''}
+        </div>` : ''}
+      </div>
+    </article>`;
+  }).join('');
+}
+
+renderHeroStats();
+renderGrid();
+</script>
+</body>
+</html>
