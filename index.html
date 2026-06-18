@@ -564,21 +564,18 @@ function renderGrid() {
   }).join('');
 }
 
-fetch(
-  "https://script.google.com/macros/s/AKfycbxgs913p3DoAzqA4baNf4O1hdklH2PNjC0L6urqH-RAd4s4IFd1L-lKa7Y3fKD_bPEl/exec
-"
-)
-.then(response => response.json())
-.then(data => {
+ fetch("https://script.google.com/macros/s/AKfycbxgs913p3DoAzqA4baNf4O1hdklH2PNjC0L6urqH-RAd4s4IFd1L-lKa7Y3fKD_bPEl/exec")
+  .then(response => {
+    console.log("Fetch response:", response);
+    return response.json();
+  })
+  .then(data => {
+    console.log("Projects loaded:", data.length);
+    projects = data;
 
-  projects = data;
-
-  renderHeroStats();
-  renderGrid();
-
-})
-.catch(error => {
-
-  console.error(error);
-
-});
+    renderHeroStats();
+    renderGrid();
+  })
+  .catch(error => {
+    console.error("FETCH ERROR:", error);
+  });
